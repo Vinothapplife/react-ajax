@@ -23,7 +23,7 @@ $(document).ready(function(){
             var resultFeatures = _.pluck(_.pluck(_.flatten(_.map([data],'features')), 'geometry'), 'coordinates');
             var resultProperties = _.pluck(_.flatten(_.map([data],'features')), 'properties');
             console.log(''
-                +JSON.stringify(resultProperties));
+                +JSON.stringify(data));
         });
     });
 
@@ -34,7 +34,9 @@ $(document).ready(function(){
 		$.get(url, function(data, status){              
             var resultFeatures = _.pluck(_.pluck(_.flatten(_.map([data],'features')), 'geometry'), 'coordinates');
             var resultProperties = _.pluck(_.flatten(_.map([data],'features')), 'properties');
-            console.log('--Welcome--'
+            console.log('--Features--'
+                +JSON.stringify(resultFeatures));
+            console.log('--Properties--'
                 +JSON.stringify(resultProperties));
         });
 	}
