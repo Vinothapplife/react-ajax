@@ -1,0 +1,16 @@
+{
+  "author": "Vinoth",
+  "name": "SAHAJMARG",
+  "description": "Natural Path Meditation",
+  "version": "0.0.1",
+  "licenses": {
+  },
+  "repository": {
+  },
+  "dependencies": {
+    "express": "3.x"
+    },
+  "devDependencies": {
+   
+  }
+}
