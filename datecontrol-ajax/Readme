@@ -1,0 +1,32 @@
+1) first find the id's from a specific start date and end date
+example: http://api.cosmiqo.com/sensor/street-lamp/run?start=1400590568000&end=1405709667000
+
+sample output:
+[{"operator":"ATS","end_pole_id":"18","start_pole_id":"1","end_time":1400777824000,"start_time":1400777761000,"lane":1,"road_name":"jln limau manis","id":1},{"operator":"ATS","end_pole_id":"1","start_pole_id":"18","end_time":1400777738000,"start_time":1400777671000,"lane":1,"road_name":"jln limau manis","id":2},{"operator":"ATS","end_pole_id":"7","start_pole_id":"1","end_time":1405709667000,"start_time":1405709633000,"lane":1,"road_name":"Tai keng lane","id":3},{"operator":"ATS","end_pole_id":"1","start_pole_id":"7","end_time":1405709616000,"start_time":1405709581000,"lane":1,"road_name":"Tai keng lane","id":4},{"operator":"ATS","end_pole_id":"12","start_pole_id":"1","end_time":1405359313000,"start_time":1405359271000,"lane":1,"road_name":"Mugliston Rd","id":5},{"operator":"ATS","end_pole_id":"1","start_pole_id":"12","end_time":1405359390000,"start_time":1405359346000,"lane":1,"road_name":"Mugliston Rd","id":6},{"operator":"ATS","end_pole_id":"6R7","start_pole_id":"6R1","end_time":1400590606000,"start_time":1400590568000,"lane":1,"road_name":"upp changi rd","id":11},{"operator":"ATS","end_pole_id":"1","start_pole_id":"1","end_time":1403716809000,"start_time":1403716747000,"lane":1,"road_name":"Lor G Telok kurau","id":17},{"operator":"ATS","end_pole_id":"43","start_pole_id":"1","end_time":1403717601000,"start_time":1403717357000,"lane":1,"road_name":"Lor g Telok kurau","id":19},{"operator":"ATS","end_pole_id":"1","start_pole_id":"43","end_time":1403717769000,"start_time":1403717636000,"lane":1,"road_name":"Lor g Telok kurau","id":20}]
+
+2) on a grid, for all the results, display the 
+- start time in human-readable form
+- end time in human-readable form
+- road name
+- lane number
+- start pole id
+- end pole id
+
+3) user then clicks on the result of interest.
+
+4) use second api to find the details of the results for say, id:20
+example: 
+http://api.cosmiqo.com/sensor/street-lamp/reading?run_id=20&start=1403717636000&end=1403717769000&limit=10000
+
+sample output: {"type":"FeatureCollection","features":[{"type":"Feature","geometry":{"type":"Point","coordinates":[103.91359710693,1.3178646564484]},"properties":{"id":298354,"run_id":20,"timestamp":1403717636000,"lux1":43.0,"lux2":30.0,"lux3":40.0}}
+
+5) you will get a lot of data so please do a step for the output. For example, take every 50th or 100th reading
+
+6) for now, say a1 = (lux1 + lux2 + lux3)/3
+
+7) then do
+- mean(a1..an)
+- min(a1..an)
+- uniformity  = min(a1..an) / mean(a1..an)
+
+8) display the results (a1, a2, ..an) on the map with placemarks of different colours with its corresponding coordinates
