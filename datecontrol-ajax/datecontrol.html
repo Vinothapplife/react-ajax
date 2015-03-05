@@ -21,7 +21,7 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.6.0/locale/bootstrap-table-en-US.min.js"></script>
 
   	<script type="text/javascript" src="main.js"></script>
-  	<script type="text/javascript" src="table.js"></script>
+  	<!--<script type="text/javascript" src="table.js"></script>-->
 </head>
 <body>
 
@@ -29,15 +29,30 @@
 		<div class="row">
 			<button class="btn btn-primary" id="btnReading">street-lamp/reading</button>
 			<button class="btn btn-primary" id="btnRun">street-lamp/run</button>
+			<button class="btn btn-primary" id="btnclick">btnclick</button>
 			<br/><br/><br/><br/><br/>
 			<div id="reportrange" class="pull-right" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc">
 				<i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
 				<span></span> <b class="caret"></b>
 			</div>
 		</div>
+		
+	<!-- 	<div class="row">
+		<table id="table-1">
+		    <thead>
+		    <tr>
+		        <th data-field="name">Name</th>
+		        <th data-field="stargazers_count">Stars</th>
+		        <th data-field="forks_count">Forks</th>
+		        <th data-field="description">Description</th>
+		    </tr>
+		    </thead>
+		</table>
+	</div> -->
 
 		<div class="row">
 			<table id="table" 
+				class="table"
 				data-pagination="true"
 				data-search="true"
 				data-show-refresh="true" 
@@ -49,7 +64,7 @@
 				data-sort-order="asc">
 			    <thead>
 			    <tr>
-			    	<th data-formatter="runningFormatter">Index</th>
+			    	<!-- <th data-formatter="runningFormatter">Index</th> -->
 			    	<th data-field="id" style="display:none">ID</th>
 			        <th data-field="start_time" data-formatter="dateFormatter">Start Time</th>
 			        <th data-field="end_time" data-formatter="dateFormatter">End Time</th>

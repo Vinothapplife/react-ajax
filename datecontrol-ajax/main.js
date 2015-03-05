@@ -23,9 +23,69 @@ $(document).ready(function(){
                 +JSON.stringify(data));
         });
     });
+	$(document).on('loadData', function loadData(event, data){
+		console.log('triggered...', event.data);
+		
+		_.forEach(data, function(n, key) {
+			debugger;
+			var endTime = moment(n.end_time).format('MM-DD-YYYY');
+			var startTime = moment(n.start_time).format('MM-DD-YYYY');
+			var objItem = { 'end_time': endTime, 'start_time':startTime };
+			_.defaults(data[key],objItem);
+		  console.log(data, n, key);
+		});
+		$('#table').bootstrapTable({
+	        data: data
+	    });		
+		$('#table').bootstrapTable('load', data);
+
+	});
+
+    $('#table').on('dateFormatter', function dateFormatter(value) {    
+		return moment(value).format('MM-DD-YYYY');
+	});
+
+    $('#table').on('runningFormatter', function runningFormatter(value, row, index) {
+	    return index;
+	});
+
+    function showMissionDetails(startDate,endDate){
+
+    	//Build street-lamb URL
+		var url = 'http://api.cosmiqo.com/sensor/street-lamp/run?start='+startDate+'&end='+endDate;		
+		$.get(url, function(data, status){   
+		console.log('table', $('#table'));           
+            console.log('--Welcome--'
+                +JSON.stringify(data));
+            	//alert(JSON.stringify(data));
+            	if(data !== null || data !== ''){
+            		console.log('triggering...');
+            		$( document  ).trigger('loadData', [data]);
+            	
+            	}
+	           //$('#table').bootstrapTable('load', data).init();
+				    
+			    $('#table').on('all.bs.table', function (e, name, args) {        
+			        console.log('Event:', name, ', data:', args);
+			    })
+			    .on('click-row.bs.table', function (e, row, $element) {
+			        console.log('Event: click-row.bs.table ---'+row.id);
+			    });
+		});
+    }
+
+	
 
 
+ 	function dateFormatter(value) {    
+		return moment(value).format('MM-DD-YYYY');
+	}
 
+	function runningFormatter(value, row, index) {
+	    return index;
+	}
+
+	//loadMissionDetails([]);
 	function getDatabyDatetime(startDate,endDate) {
 	
 		//Build street-lamb URL
@@ -110,7 +170,8 @@ $(document).ready(function(){
 		  + " ------ "
 		  + picker.endDate
 		); 
-		getDatabyDatetime(picker.startDate, picker.endDate);
+		//getDatabyDatetime(picker.startDate, picker.endDate);
+		showMissionDetails(picker.startDate, picker.endDate);
 	  });
 	  $('#reportrange').on('cancel.daterangepicker', function(ev, picker) { console.log("cancel event fired"); });
 
