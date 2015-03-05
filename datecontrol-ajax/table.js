@@ -237,13 +237,19 @@ $(function () {
     $('#table').bootstrapTable({
         data: dataItems
     });
+    
+    $('#table').on('all.bs.table', function (e, name, args) {        
+        console.log('Event:', name, ', data:', args);
+    })
+    .on('click-row.bs.table', function (e, row, $element) {
+        console.log('Event: click-row.bs.table ---'+row.id);
+    })
 });
 
 $(function () {
     $('#table-static').bootstrapTable({
         data: data
     });
-    queryParams();
 });
 
 
@@ -253,14 +259,4 @@ function dateFormatter(value) {
 
 function runningFormatter(value, row, index) {
     return index;
-}
-
- function queryParams() {
-    return {
-        type: 'owner',
-        sort: 'updated',
-        direction: 'desc',
-        per_page: 5,
-        page: 1
-    };
 }
